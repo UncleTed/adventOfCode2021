@@ -11,18 +11,18 @@ def part1():
         if (m > prev):
             increases = increases + 1
         
-            print ('m: ' , m, 'p: ', prev)
-        else:
-            print('m: ', m, 'decrease')
+            # print ('m: ' , m, 'p: ', prev)
+        # else:
+            # print('m: ', m, 'decrease')
         prev = m
     print('part1: ', increases)
 
 def part2():
     measurements = []
     with open("./short2.txt", "r") as f:
-        measurements = [tuple(line.split()) for line in f]
-    print(measurements[0][0])             
-
+        measurements = [(line.split()) for line in f]
+    for m in measurements:
+        print(m)
 
 
 part1()
