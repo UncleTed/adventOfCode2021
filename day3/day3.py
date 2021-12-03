@@ -16,11 +16,7 @@ def part1():
         episilon_rate += Counter(bits[i]).most_common()[1][0]
         
     
-    print('gamma: ', int(gamma_rate,2))     
-    print('episilon: ', int(episilon_rate,2))  
-
-
-    
-
+    print('\u03B3' ,' * ' ,'\u03B5', ' = ', int(gamma_rate,2) * int(episilon_rate,2))     
+ 
 
 part1()
