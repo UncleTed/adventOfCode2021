@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 
 def part1():
     measurements = []
@@ -18,11 +19,19 @@ def part1():
     print('part1: ', increases)
 
 def part2():
-    measurements = []
+    @dataclass
+    class depth:
+        letter: str
+        value: int
+
+    all_depths = [] 
     with open("./short2.txt", "r") as f:
         measurements = [(line.split()) for line in f]
     for m in measurements:
-        print(m)
+        val = int(m.pop(0))
+        for e in m:
+            depth(val, int(e))
+
 
 
 part1()

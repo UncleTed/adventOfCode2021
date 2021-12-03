@@ -30,6 +30,9 @@ Use the File -> Preferences -> Extensions menu option to open the extensions pan
 * Python  
 * Code-Runner
 
+### Themes
+Install the Nord theme for a calm icy feeling
+
 ### Settings
 * Add the python virtual environment to VSCode  
 Type the settings key (crtl ,) to open the settings window in VSCode. Or use the File -> Preferences -> Settings menu option. This will open two panels: User Settings and Workspace Settings. Click on Workspace Settings.
@@ -63,6 +66,8 @@ Open the workspace settings file located in .vscode/settings.json and add the js
 
 * Turn off Code Lens in the editor 
 `"editor.codeLens": false`
+* Turn on auto save
+`"files.autoSave": "onFocusChange"`
 
 ## Running unit tests in the terminal
 ~~python -m unittest discover -s ./test -p *_test.py~~
