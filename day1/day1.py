@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 def part1():
     measurements = []
-    with open("./long1.txt", "r") as f:
+    with open("./long.txt", "r") as f:
         for line in f: 
             measurements.append(int(line))
 
@@ -18,23 +18,33 @@ def part1():
         prev = m
     print('part1: ', increases)
 
+
+def letters():
+    a = 97
+    count = 0
+    while 1:
+        yield chr(a)
+        a = a + 1
+
 def part2():
-    @dataclass
-    class depth:
-        letter: str
-        value: int
-
-    all_depths = [] 
-    with open("./short2.txt", "r") as f:
+    gen = letters()
+    count = 1
+    with open("./short1.txt", "r") as f:
         measurements = [(line.split()) for line in f]
+    letter = gen.__next__()
+    print(measurements.pop(0), letter)
     for m in measurements:
-        val = int(m.pop(0))
-        for e in m:
-            depth(val, int(e))
+        if (count % 3 == 0):
+            letter = gen.__next__()
+        print(m, letter)    
+        count = count + 1
 
-
+        
+            
 
 part1()
 part2()
+
     
+
 
