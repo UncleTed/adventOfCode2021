@@ -19,28 +19,44 @@ def part1():
     print('part1: ', increases)
 
 
-def letters():
-    a = 97
-    count = 0
-    while 1:
-        yield chr(a)
-        a = a + 1
 
+# Move the pointer
+#  1 2 3 4 5 6 
+#  ^ ^ ^
+#    ^ ^ ^ 
+#      ^ ^ ^ 
+
+
+def sumOfNextThree(start, measurements):
+    sum = 0
+    for i in range(start, start + 3):
+        sum = sum + measurements[i]
+    return sum
+
+    
 def part2():
-    gen = letters()
-    count = 1
-    with open("./short1.txt", "r") as f:
-        measurements = [(line.split()) for line in f]
-    letter = gen.__next__()
-    print(measurements.pop(0), letter)
-    for m in measurements:
-        if (count % 3 == 0):
-            letter = gen.__next__()
-        print(m, letter)    
-        count = count + 1
+    increases = 0
+    count = 0
+    measurements = []
+    with open("./long.txt", "r") as f:
+        for line in f:
+            measurements.append(int(line))
 
+    current = 0
+    prev = sumOfNextThree(0,measurements)
+    print(prev)
+    measurements.pop(0)
+    i = 0
+    while (i < len(measurements)-2):
+        current = sumOfNextThree(i, measurements)
+        print(current)
+        if ( current > prev):
+            print('c: ', current, 'p: ', prev)
+            increases = increases + 1
+        i = i + 1
+        prev = current
         
-            
+    print('increases ', increases)
 
 part1()
 part2()
