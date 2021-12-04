@@ -4,14 +4,6 @@ Ted's further adventures in python and the Advent Of Code 2021
 
 # How to setup your environment
 We are using Linux, python3 and a python virtual enviroment. This whole setup is based on the tutorial found at: https://realpython.com/python-virtual-environments-a-primer/
-
-## Install VSCode packages
-```
-cd ~/tmp
-git clone https://aur.archlinux.org/visual-studio-code-bin.git
-cd visual-studio-code-bin/
-makepkg -si
-```
   
 ## Enable the python virtual environment
 `python -m venv env`
@@ -23,6 +15,17 @@ To deactivate it run `deactivate`
 
 ## Required Python Packages
 The file requirements.txt has the list of required python packages. Install the packages with the command: `pip install -r requirements.txt`
+
+## Put the secret in the .env
+In order to view the leaderboard, you need to get the session key from the browswer tools
+
+## Install VSCode packages
+```
+cd ~/tmp
+git clone https://aur.archlinux.org/visual-studio-code-bin.git
+cd visual-studio-code-bin/
+makepkg -si
+```
 
 ## Configure VSCode 
 ### Extensions
