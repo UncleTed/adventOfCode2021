@@ -1,5 +1,4 @@
 def print_board(board):
-    print('-------')
     for b in board:
         print(b)
 
@@ -9,6 +8,19 @@ def mark_number(board, number):
         for b in row:
             if ( b[0] == number):
                 b[1] = True
+
+
+def all_boards_have_bingo(boards):
+    number_of_bingos = 1
+    print(F'number of boards {len(boards)}')
+    for b in boards:
+        if (bingo(b)):
+            number_of_bingos += 1
+        if (number_of_bingos == len(boards)):
+            print('all boards have at least one bingo')
+            return True
+    return False
+
 
 def bingo(board):
     if (len(board) > 0):
@@ -42,19 +54,23 @@ def sum_unmarked(board):
 
 def part1():
     boards = []
+
+    number_of_boards = 0
     with open("long.txt") as f:
         draw_number = iter(f.readline().split(','))
+        f.readline()
         b = []
         for line in f:
             if(not line.isspace()):
                 line.rstrip('\n')
                 b.append([[l,False] for l in line.split() if not l.isspace()])
             else:
-                # print_board(b)
+                number_of_boards += 1
                 boards.append(b)
                 b = []
 
     go = True
+    number_of_bingos = 0
     while (go):
         try:
             num = next(draw_number)
@@ -67,11 +83,12 @@ def part1():
                 if(bingo(b)):
                     print("Bingo!")
                     print_board(b)
-                    print(sum_unmarked(b))
-                    print(num)
-                    print('answer: ' , sum_unmarked(b) * int(num))
-                    go = False
+                    print(F'sum * num = {sum_unmarked(b) * int(num)}')
+                    if (all_boards_have_bingo(boards)):
+                        go = False
                     break
+
+                    # break
 
 
         except StopIteration:
@@ -79,5 +96,6 @@ def part1():
     # for b in boards:
     #     print_board(b)
 
-# 27475 is too low
+# 27475 is too low for part1
+#  15390 is too high, 14060 is too high
 part1()
