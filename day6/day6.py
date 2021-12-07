@@ -17,7 +17,7 @@ def part1():
                 new_fish.append(8)
             else:
                 f.append(l -1)
-        lantern_fish = f.extend( new_fish)
+        lantern_fish = f + new_fish
         print(len(lantern_fish))
 
         
