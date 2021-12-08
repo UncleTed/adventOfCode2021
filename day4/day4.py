@@ -79,11 +79,12 @@ def part1():
                 # print(b)
                 mark_number(b, num)
 
-            for b in boards:
+            for i, b in enumerate(boards):
                 if(bingo(b)):
-                    print("Bingo!")
+                    print(F"Bingo! for board {i}")
                     print_board(b)
                     print(F'sum * num = {sum_unmarked(b) * int(num)}')
+                    boards.pop(i)
                     if (all_boards_have_bingo(boards)):
                         go = False
                     break
@@ -97,5 +98,5 @@ def part1():
     #     print_board(b)
 
 # 27475 is too low for part1
-#  15390 is too high, 14060 is too high
+#  15390 is too high, 14060 is too high, 10064 is too high
 part1()
