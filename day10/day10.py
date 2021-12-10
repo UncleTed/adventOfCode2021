@@ -1,7 +1,19 @@
-from dataclasses import dataclass
+import statistics
 
-opened = [ '[', '{', '(', '<']
-closed = [ ']', '}', ')', '>']
+open_to_close = {
+    '[' : ']',
+    '{' : '}', 
+    '(': ')', 
+    '<' : '>'
+}
+incomplete_scores = []
+
+close_to_open = {
+    ']' : '[',
+    '}' : '{', 
+    ')' : '(', 
+    '>' : '<'
+}
 
 illegal = {
     ')' : 3,
@@ -9,15 +21,25 @@ illegal = {
     '}' : 1197,
     '>' : 25137
 }
-@dataclass
-class open_close:
-    open_paren: str
-    close_paren: str
+incomplete = {
+    ')' : 1,
+    ']' : 2,
+    '}' : 3,
+    '>' : 4
+}
 
-
+def score_incomplete(stack):
+    score = 0
+    for s in stack:
+        score = (score*5)+incomplete[open_to_close[s]]
+        
+    # print(F'{stack} {score}')
+    if score > 0:
+        incomplete_scores.append(score)
+         
 
 def part1():    
-    score = 0
+    illegal_score = 0
     input_lines = []
     with open("./long.txt", "r") as f:
         for line in f:
@@ -25,16 +47,21 @@ def part1():
         for line in input_lines:
             stack = []
             for l in line:
-                if l in opened:
+                if l in open_to_close.keys():
                     stack.append(l)
-                elif l in closed:
+                elif l in close_to_open.keys():
                     top = stack.pop()
-                    open_index = opened.index(top)
-                    if closed.index(l) != open_index:
-                        score += illegal[l]
-                        print(F'Expected {closed[open_index]} but got {l} scored: {illegal[l]}')
+                    
+                    if close_to_open[l] != top:
+                        illegal_score += illegal[l]
+                        # print(F'Expected {open_to_close[top]} but got {l} scored: {illegal[l]}')
+                        stack = []
                         break
+            stack.reverse()
+            score_incomplete(stack)
 
-    print(score)
+    print(F'Illegal score : {illegal_score}')
+    # print(sorted(incomplete_scores))
+    print(F'Incomplete score: {statistics.median(incomplete_scores)}')
 
 part1()
